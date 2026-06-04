@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Welcome_email</fullName>
+        <description>Welcome email</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>rahul@visualpath.com.dev</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/SalesNewCustomerEmail</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Update_Account_Source_Field</fullName>
+        <field>AccountSource</field>
+        <literalValue>Other</literalValue>
+        <name>Update Account Source Field</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Welcome Email</fullName>
+        <actions>
+            <name>Welcome_email</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Update_Account_Source_Field</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.Name</field>
+            <operation>notEqual</operation>
+            <value>NULL</value>
+        </criteriaItems>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+</Workflow>

@@ -1,0 +1,46 @@
+<apex:page standardController="Account" >
+    
+    
+    <apex:pageBlock title=" Account Registration Info">
+        <apex:pageBlockSection title="Account Basic Info" columns="1">
+            <apex:outputField value="{!account.name}"/>
+            <apex:outputField value="{!account.Fax}"/>
+            <apex:outputField value="{!account.Phone}"/>
+            <apex:outputField value="{!account.Industry}"/>
+            <apex:outputField value="{!account.Rating}"/>
+            <apex:outputField value="{!account.Sic}"/>
+            <apex:outputField value="{!account.Description}"/>
+            <apex:outputField value="{!account.Billingcity}"/>
+            <apex:outputField value="{!account.FAX}"/>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Account Related History">
+            <apex:relatedList list="Contacts"/>
+            <apex:relatedList list="Cases"/>
+            <apex:relatedList list="opportunities"/>
+                    </apex:pageBlockSection>
+        <apex:pageBlockSection title="Account custom related Table View Info">
+            <apex:pageBlockTable value="{!Account.contacts}" var="ac">
+                <apex:column value="{!ac.FirstName}"/>
+                <apex:column value="{!ac.LastName}"/>
+                <apex:column value="{!ac.MobilePhone}"/>
+                <apex:column value="{!ac.LeadSource}"/>
+            </apex:pageBlockTable>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+    <apex:pageBlock title="Contact Info">
+        <apex:pageBlockSection title="Personal Info">
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Family Info">
+        </apex:pageBlockSection>
+            </apex:pageBlock>
+     <apex:pageBlock title="Finance Info">
+        <apex:pageBlockSection title="Bank Info">
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Proprty Info">
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Misc. Info">
+            <apex:detail />
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+
+</apex:page>

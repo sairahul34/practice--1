@@ -1,0 +1,157 @@
+<apex:page standardController="Account" showHeader="false" sidebar="false"  >
+    
+    <style>
+        .myinput
+        {
+        font-size: 15px;
+        color:blue;
+        background-color: lightblue;
+        }
+        .mytabs
+        {
+        	font-size: 15px;
+        border-style: dotted;
+        background-color:pink;
+        border-width: 5px;
+        border-color: voilet;
+        
+        }
+        .mybtns
+        { 
+        font-size: 15px;
+        background-color: lightblue;
+        }
+        
+        
+        h1
+        {
+        margin-left: 600px;
+        	font-size: 35px;
+        }
+        
+        
+        body
+        {
+        	background-color: yellow;
+        }
+       .box
+        {
+         margin-left: 600px;
+        border-width: 5px;
+        border-style: Solid;
+        border-color: red;
+        font-size: 15px;
+        }
+        
+    </style>
+    <div class="box">
+        <b> Logged in User Name </b>:{!$User.FirstName} {!$User.LastName} <br/>
+   		 <b>Logged in User Email </b> :{!$User.Email}
+    </div>
+    
+    
+	<apex:tabPanel >
+        <apex:image value="{!$Resource.Sj1}" width="1000"/>
+        <p> </p>
+        <apex:outputLink value="https://www.spicejet.com/"> Spicejet home link
+        </apex:outputLink>
+        <p></p>
+        <apex:iframe src="https://www.spicejet.com/"/>
+        <h1>
+            Welcome to SpiceJEt
+        </h1>
+    	<apex:tab label="Tab 1 --Account Creation" title="This tab is for creating or editing account" styleClass="mytabs">
+       	<apex:form >
+            <apex:pageBlock >
+            	<apex:pageBlockSection columns="1" > 
+                                      
+                	<apex:inputField value="{!Account.Name}" style=" font-size: 25px;color:blue;background-color: lightblue;"/>
+                    <apex:inputField value="{!Account.Fax}" required="true"/>
+                    <apex:inputField value="{!account.Phone}" styleClass="myinput"/>
+            		<apex:inputField value="{!account.Industry}" styleClass="myinput"/>
+           			<apex:inputField value="{!account.Rating}" styleClass="myinput"/>
+           			<apex:inputField value="{!account.Sic}" styleClass="myinput"/>
+            		<apex:inputField value="{!account.Description}" styleClass="myinput"/>
+            		<apex:inputField value="{!account.Billingcity}" styleClass="myinput"/>
+                    <apex:inputField value="{!ACcount.Fax}" styleClass="myinput"/>
+                                   
+                    <apex:inputTextarea label="Enter Your story" cols="45" rows="10" richText="true" styleClass="myinput"/>
+					<apex:inputHidden value="{!ACcount.Fax}"/>         
+                    <apex:inputSecret value="{!ACcount.Fax}" styleClass="myinput"/>
+                    <apex:inputCheckbox label="Are You Indian?"/>
+                   
+                    <apex:selectRadio label="Select Your Course" layout="pagedirection" styleClass="myinput">
+                        <apex:selectOption itemLabel="Salesforce" itemValue="sfdc"/>
+                        <apex:selectOption itemLabel=".Net" itemValue="net"/>
+                        <apex:selectOption itemLabel="SAP CRM" itemValue="SAP"/>
+                        <apex:selectOption itemLabel="JAVA" itemValue="J"/>                                        
+                                                
+                    </apex:selectRadio>
+                    
+                     <apex:selectCheckboxes label="Select Your Course" layout="pagedirection" styleClass="myinput">
+                            <apex:selectOption itemLabel="Salesforce" itemValue="sfdc"/>
+                        	<apex:selectOption itemLabel=".Net" itemValue="net"/>
+                        	<apex:selectOption itemLabel="SAP CRM" itemValue="SAP"/>
+                        	<apex:selectOption itemLabel="JAVA" itemValue="J"/>
+                        </apex:selectCheckboxes>
+                    
+                    <apex:commandButton value="Click here to Save" action="{!Save}" style="font-size: 15px;color:blue;background-color: lightblue;"/>
+                    <apex:commandLink value="Click here to Save" action="{!Save}"/>
+                </apex:pageBlockSection>
+            
+            </apex:pageBlock>
+            </apex:form>
+        </apex:tab>
+        <apex:tab label="Tab 2 -- Title To be decided" styleClass="mytabs">
+            <apex:listViews type="Contact"/>
+        </apex:tab>
+        <apex:tab label="Tab 3 --Account Information">
+            
+    
+    <apex:pageBlock title=" Account Registration Info">
+        <apex:pageBlockSection title="Account Basic Info" columns="1" >
+            <apex:outputField value="{!account.name}"/>
+            <apex:outputField value="{!account.Fax}"/>
+            <apex:outputField value="{!account.Phone}"/>
+            <apex:outputField value="{!account.Industry}"/>
+            <apex:outputField value="{!account.Rating}"/>
+            <apex:outputField value="{!account.Sic}"/>
+            <apex:outputField value="{!account.Description}"/>
+            <apex:outputField value="{!account.Billingcity}"/>
+            <apex:outputField value="{!account.FAX}"/>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Account Related History">
+            <apex:relatedList list="Contacts"/>
+            <apex:relatedList list="Cases"/>
+            <apex:relatedList list="opportunities"/>
+                    </apex:pageBlockSection>
+        <apex:pageBlockSection title="Account custom related Table View Info">
+            <apex:pageBlockTable value="{!Account.contacts}" var="ac">
+                <apex:column value="{!ac.FirstName}"/>
+                <apex:column value="{!ac.LastName}"/>
+                <apex:column value="{!ac.MobilePhone}"/>
+                <apex:column value="{!ac.LeadSource}"/>
+            </apex:pageBlockTable>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+    <apex:pageBlock title="Contact Info">
+        <apex:pageBlockSection title="Personal Info">
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Family Info">
+        </apex:pageBlockSection>
+            </apex:pageBlock>
+     <apex:pageBlock title="Finance Info">
+        <apex:pageBlockSection title="Bank Info">
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Proprty Info">
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Misc. Info">
+            <apex:detail />
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+
+
+        </apex:tab>
+    </apex:tabPanel>
+    
+</apex:page>

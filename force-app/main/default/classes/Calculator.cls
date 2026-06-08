@@ -1,30 +1,33 @@
 /**
- * @description Utility class for basic arithmetic operations.
+ * @description Utility class providing basic arithmetic operations.
+ * This class cannot be instantiated.
  */
+@SuppressWarnings('PMD.AvoidGlobalModifier')
 public with sharing class Calculator {
 
     /**
-     * @description Private constructor to prevent instantiation of utility class.
+     * @description Private constructor to prevent instantiation.
      */
+    @SuppressWarnings('PMD.EmptyStatementBlock')
     private Calculator() {
-        // Utility class - no instantiation
+        throw new UnsupportedOperationException('Calculator is a utility class and cannot be instantiated.');
     }
 
     /**
-     * @description Adds two integers.
-     * @param firstNumber The first integer.
-     * @param secondNumber The second integer.
-     * @return Sum of the two integers.
+     * @description Adds two integers together.
+     * @param firstNumber The first operand.
+     * @param secondNumber The second operand.
+     * @return Integer result of adding firstNumber and secondNumber.
      */
     public static Integer add(Integer firstNumber, Integer secondNumber) {
         return firstNumber + secondNumber;
     }
 
     /**
-     * @description Subtracts the second integer from the first.
-     * @param firstNumber The first integer.
-     * @param secondNumber The second integer.
-     * @return Difference of the two integers.
+     * @description Subtracts secondNumber from firstNumber.
+     * @param firstNumber The number to subtract from.
+     * @param secondNumber The number to subtract.
+     * @return Integer result of the subtraction.
      */
     public static Integer subtract(Integer firstNumber, Integer secondNumber) {
         return firstNumber - secondNumber;
@@ -32,20 +35,20 @@ public with sharing class Calculator {
 
     /**
      * @description Multiplies two integers.
-     * @param firstNumber The first integer.
-     * @param secondNumber The second integer.
-     * @return Product of the two integers.
+     * @param firstNumber The first operand.
+     * @param secondNumber The second operand.
+     * @return Integer result of the multiplication.
      */
     public static Integer multiply(Integer firstNumber, Integer secondNumber) {
         return firstNumber * secondNumber;
     }
 
     /**
-     * @description Divides the first decimal by the second.
+     * @description Divides the dividend by the divisor.
      * @param dividend The number to be divided.
-     * @param divisor The number to divide by.
-     * @return Result of the division.
-     * @throws IllegalArgumentException if divisor is zero.
+     * @param divisor The number to divide by. Must not be zero.
+     * @return Decimal result of the division.
+     * @throws IllegalArgumentException Thrown when divisor is zero.
      */
     public static Decimal divide(Decimal dividend, Decimal divisor) {
         if (divisor == 0) {

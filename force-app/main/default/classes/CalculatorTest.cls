@@ -1,71 +1,66 @@
 /**
- * @description Test class for Calculator utility.
+ * @description Test class for Calculator. Covers all arithmetic operations
+ * and edge cases including division by zero.
  */
 @isTest
 private class CalculatorTest {
 
+    private static final Integer FIRST_NUMBER  = 10;
+    private static final Integer SECOND_NUMBER = 5;
+
     /**
-     * @description Tests the add method with positive integers.
+     * @description Verifies that add() returns the correct sum.
      */
     @isTest
-    static void testAdd() {
-        // Arrange
-        Integer firstNumber = 5;
-        Integer secondNumber = 3;
-
+    static void testAddPositiveNumbers() {
         // Act
         Test.startTest();
-        Integer result = Calculator.add(firstNumber, secondNumber);
+        Integer result = Calculator.add(FIRST_NUMBER, SECOND_NUMBER);
         Test.stopTest();
 
         // Assert
-        System.assertEquals(8, result, 'Addition result should be 8');
+        Integer expectedResult = 15;
+        System.assertEquals(expectedResult, result, 'Expected sum to be 15');
     }
 
     /**
-     * @description Tests the subtract method.
+     * @description Verifies that subtract() returns the correct difference.
      */
     @isTest
-    static void testSubtract() {
-        // Arrange
-        Integer firstNumber = 10;
-        Integer secondNumber = 4;
-
+    static void testSubtractPositiveNumbers() {
         // Act
         Test.startTest();
-        Integer result = Calculator.subtract(firstNumber, secondNumber);
+        Integer result = Calculator.subtract(FIRST_NUMBER, SECOND_NUMBER);
         Test.stopTest();
 
         // Assert
-        System.assertEquals(6, result, 'Subtraction result should be 6');
+        Integer expectedResult = 5;
+        System.assertEquals(expectedResult, result, 'Expected difference to be 5');
     }
 
     /**
-     * @description Tests the multiply method.
+     * @description Verifies that multiply() returns the correct product.
      */
     @isTest
-    static void testMultiply() {
-        // Arrange
-        Integer firstNumber = 4;
-        Integer secondNumber = 3;
-
+    static void testMultiplyPositiveNumbers() {
         // Act
         Test.startTest();
-        Integer result = Calculator.multiply(firstNumber, secondNumber);
+        Integer result = Calculator.multiply(FIRST_NUMBER, SECOND_NUMBER);
         Test.stopTest();
 
         // Assert
-        System.assertEquals(12, result, 'Multiplication result should be 12');
+        Integer expectedResult = 50;
+        System.assertEquals(expectedResult, result, 'Expected product to be 50');
     }
 
     /**
-     * @description Tests the divide method with valid inputs.
+     * @description Verifies that divide() returns the correct quotient.
      */
     @isTest
-    static void testDivide() {
+    static void testDividePositiveNumbers() {
         // Arrange
         Decimal dividend = 10;
-        Decimal divisor = 2;
+        Decimal divisor  = 2;
 
         // Act
         Test.startTest();
@@ -73,18 +68,20 @@ private class CalculatorTest {
         Test.stopTest();
 
         // Assert
-        System.assertEquals(5, result, 'Division result should be 5');
+        Decimal expectedResult = 5;
+        System.assertEquals(expectedResult, result, 'Expected quotient to be 5');
     }
 
     /**
-     * @description Tests that divide throws an exception when divisor is zero.
+     * @description Verifies that divide() throws IllegalArgumentException when divisor is zero.
      */
     @isTest
-    static void testDivideByZero() {
+    static void testDivideByZeroThrowsException() {
         // Arrange
-        Decimal dividend = 10;
-        Decimal divisor = 0;
+        Decimal dividend        = 10;
+        Decimal divisor         = 0;
         Boolean exceptionThrown = false;
+        String  exceptionMsg    = '';
 
         // Act
         Test.startTest();
@@ -92,11 +89,49 @@ private class CalculatorTest {
             Calculator.divide(dividend, divisor);
         } catch (IllegalArgumentException ex) {
             exceptionThrown = true;
-            System.assertEquals('Cannot divide by zero.', ex.getMessage(), 'Exception message mismatch');
+            exceptionMsg    = ex.getMessage();
         }
         Test.stopTest();
 
         // Assert
-        System.assert(exceptionThrown, 'Expected IllegalArgumentException was not thrown');
+        System.assert(exceptionThrown, 'Expected IllegalArgumentException to be thrown for divide by zero');
+        System.assertEquals('Cannot divide by zero.', exceptionMsg, 'Exception message does not match expected value');
+    }
+
+    /**
+     * @description Verifies that add() works correctly with negative numbers.
+     */
+    @isTest
+    static void testAddNegativeNumbers() {
+        // Arrange
+        Integer negativeFirst  = -4;
+        Integer negativeSecond = -6;
+
+        // Act
+        Test.startTest();
+        Integer result = Calculator.add(negativeFirst, negativeSecond);
+        Test.stopTest();
+
+        // Assert
+        Integer expectedResult = -10;
+        System.assertEquals(expectedResult, result, 'Expected sum of negatives to be -10');
+    }
+
+    /**
+     * @description Verifies that multiply() with zero returns zero.
+     */
+    @isTest
+    static void testMultiplyByZero() {
+        // Arrange
+        Integer zero = 0;
+
+        // Act
+        Test.startTest();
+        Integer result = Calculator.multiply(FIRST_NUMBER, zero);
+        Test.stopTest();
+
+        // Assert
+        Integer expectedResult = 0;
+        System.assertEquals(expectedResult, result, 'Expected product with zero to be 0');
     }
 }

@@ -1,137 +1,127 @@
 /**
- * @description Test class for Calculator. Covers all arithmetic operations
- * and edge cases including division by zero.
+ * @description Test class for the Calculator utility class.
+ * Validates all arithmetic operations and edge cases.
  */
 @isTest
 private class CalculatorTest {
 
-    private static final Integer FIRST_NUMBER  = 10;
-    private static final Integer SECOND_NUMBER = 5;
+    private static final Integer AUGEND        = 10;
+    private static final Integer ADDEND        = 5;
+    private static final Integer MULTIPLICAND  = 4;
+    private static final Integer MULTIPLIER    = 3;
+    private static final Integer MINUEND       = 10;
+    private static final Integer SUBTRAHEND    = 4;
 
     /**
-     * @description Verifies that add() returns the correct sum.
+     * @description Verifies add() returns correct sum of two positive integers.
      */
     @isTest
-    static void testAddPositiveNumbers() {
-        // Act
+    static void testAddReturnsCorrectSum() {
+        Integer expectedSum = 15;
+
         Test.startTest();
-        Integer result = Calculator.add(FIRST_NUMBER, SECOND_NUMBER);
+        Integer actualSum = Calculator.add(AUGEND, ADDEND);
         Test.stopTest();
 
-        // Assert
-        Integer expectedResult = 15;
-        System.assertEquals(expectedResult, result, 'Expected sum to be 15');
+        System.assertEquals(expectedSum, actualSum, 'add() should return 15 for inputs 10 and 5');
     }
 
     /**
-     * @description Verifies that subtract() returns the correct difference.
+     * @description Verifies subtract() returns correct difference of two integers.
      */
     @isTest
-    static void testSubtractPositiveNumbers() {
-        // Act
+    static void testSubtractReturnsCorrectDifference() {
+        Integer expectedDifference = 6;
+
         Test.startTest();
-        Integer result = Calculator.subtract(FIRST_NUMBER, SECOND_NUMBER);
+        Integer actualDifference = Calculator.subtract(MINUEND, SUBTRAHEND);
         Test.stopTest();
 
-        // Assert
-        Integer expectedResult = 5;
-        System.assertEquals(expectedResult, result, 'Expected difference to be 5');
+        System.assertEquals(expectedDifference, actualDifference, 'subtract() should return 6 for inputs 10 and 4');
     }
 
     /**
-     * @description Verifies that multiply() returns the correct product.
+     * @description Verifies multiply() returns correct product of two integers.
      */
     @isTest
-    static void testMultiplyPositiveNumbers() {
-        // Act
+    static void testMultiplyReturnsCorrectProduct() {
+        Integer expectedProduct = 12;
+
         Test.startTest();
-        Integer result = Calculator.multiply(FIRST_NUMBER, SECOND_NUMBER);
+        Integer actualProduct = Calculator.multiply(MULTIPLICAND, MULTIPLIER);
         Test.stopTest();
 
-        // Assert
-        Integer expectedResult = 50;
-        System.assertEquals(expectedResult, result, 'Expected product to be 50');
+        System.assertEquals(expectedProduct, actualProduct, 'multiply() should return 12 for inputs 4 and 3');
     }
 
     /**
-     * @description Verifies that divide() returns the correct quotient.
+     * @description Verifies divide() returns correct quotient for valid inputs.
      */
     @isTest
-    static void testDividePositiveNumbers() {
-        // Arrange
-        Decimal dividend = 10;
-        Decimal divisor  = 2;
+    static void testDivideReturnsCorrectQuotient() {
+        Decimal inputDividend    = 10;
+        Decimal inputDivisor     = 2;
+        Decimal expectedQuotient = 5;
 
-        // Act
         Test.startTest();
-        Decimal result = Calculator.divide(dividend, divisor);
+        Decimal actualQuotient = Calculator.divide(inputDividend, inputDivisor);
         Test.stopTest();
 
-        // Assert
-        Decimal expectedResult = 5;
-        System.assertEquals(expectedResult, result, 'Expected quotient to be 5');
+        System.assertEquals(expectedQuotient, actualQuotient, 'divide() should return 5 for inputs 10 and 2');
     }
 
     /**
-     * @description Verifies that divide() throws IllegalArgumentException when divisor is zero.
+     * @description Verifies divide() throws IllegalArgumentException when divisor is zero.
      */
     @isTest
-    static void testDivideByZeroThrowsException() {
-        // Arrange
-        Decimal dividend        = 10;
-        Decimal divisor         = 0;
-        Boolean exceptionThrown = false;
-        String  exceptionMsg    = '';
+    static void testDivideByZeroThrowsIllegalArgumentException() {
+        Decimal inputDividend       = 10;
+        Decimal inputDivisor        = 0;
+        Boolean isExceptionThrown   = false;
+        String  actualMessage       = '';
+        String  expectedMessage     = 'Cannot divide by zero.';
 
-        // Act
         Test.startTest();
         try {
-            Calculator.divide(dividend, divisor);
-        } catch (IllegalArgumentException ex) {
-            exceptionThrown = true;
-            exceptionMsg    = ex.getMessage();
+            Calculator.divide(inputDividend, inputDivisor);
+        } catch (IllegalArgumentException thrownException) {
+            isExceptionThrown = true;
+            actualMessage     = thrownException.getMessage();
         }
         Test.stopTest();
 
-        // Assert
-        System.assert(exceptionThrown, 'Expected IllegalArgumentException to be thrown for divide by zero');
-        System.assertEquals('Cannot divide by zero.', exceptionMsg, 'Exception message does not match expected value');
+        System.assert(isExceptionThrown, 'IllegalArgumentException should be thrown when divisor is zero');
+        System.assertEquals(expectedMessage, actualMessage, 'Exception message should match expected value');
     }
 
     /**
-     * @description Verifies that add() works correctly with negative numbers.
+     * @description Verifies add() returns correct result when adding negative numbers.
      */
     @isTest
-    static void testAddNegativeNumbers() {
-        // Arrange
-        Integer negativeFirst  = -4;
-        Integer negativeSecond = -6;
+    static void testAddWithNegativeNumbersReturnsCorrectSum() {
+        Integer negativeAugend  = -4;
+        Integer negativeAddend  = -6;
+        Integer expectedSum     = -10;
 
-        // Act
         Test.startTest();
-        Integer result = Calculator.add(negativeFirst, negativeSecond);
+        Integer actualSum = Calculator.add(negativeAugend, negativeAddend);
         Test.stopTest();
 
-        // Assert
-        Integer expectedResult = -10;
-        System.assertEquals(expectedResult, result, 'Expected sum of negatives to be -10');
+        System.assertEquals(expectedSum, actualSum, 'add() should return -10 for inputs -4 and -6');
     }
 
     /**
-     * @description Verifies that multiply() with zero returns zero.
+     * @description Verifies multiply() returns zero when one operand is zero.
      */
     @isTest
-    static void testMultiplyByZero() {
-        // Arrange
-        Integer zero = 0;
+    static void testMultiplyByZeroReturnsZero() {
+        Integer zeroMultiplier  = 0;
+        Integer expectedProduct = 0;
 
-        // Act
         Test.startTest();
-        Integer result = Calculator.multiply(FIRST_NUMBER, zero);
+        Integer actualProduct = Calculator.multiply(MULTIPLICAND, zeroMultiplier);
         Test.stopTest();
 
-        // Assert
-        Integer expectedResult = 0;
-        System.assertEquals(expectedResult, result, 'Expected product with zero to be 0');
+        System.assertEquals(expectedProduct, actualProduct, 'multiply() should return 0 when multiplier is 0');
     }
 }
